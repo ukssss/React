@@ -1,31 +1,20 @@
 import React, { useState } from 'react';
 
 const Auth = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [form, setForm] = useState('');
 
-  const onChange = (e) => {
-    const {
-      target: { name, value },
-    } = e;
-
-    if (name === 'email') {
-      setEmail(value);
-    } else if (name === 'password') {
-      setPassword(value);
-    }
-  };
+  const onChange = ({ target: { name, value } }) => setForm({ ...form, [name]: value });
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('로그인 완료 ☺️');
+    console.log(form);
   };
 
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <input name='email' type='text' placeholder='Email' required value={email} onChange={onChange} />
-        <input name='password' type='password' placeholder='Password' required value={password} onChange={onChange} />
+        <input name='email' type='text' placeholder='Email' required onChange={onChange} />
+        <input name='password' type='password' placeholder='Password' required onChange={onChange} />
         <input type='submit' placeholder='Log In' required />
       </form>
       <div>
