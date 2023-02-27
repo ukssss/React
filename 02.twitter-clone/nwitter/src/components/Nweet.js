@@ -43,7 +43,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
       ) : (
         <>
           <h4>{nweetObj.text}</h4>
-          {nweetObj.attachmentURL && <img src={nweetObj.attachmentURL} width='50px' height='50px' alt='' />}
+          {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} width='50px' height='50px' alt='' />}
           {isOwner && (
             <>
               <button onClick={onDeleteClick}>Delete Nweet</button>
