@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>
-      {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} /> : 'Initializing...'}
+      {init ? <AppRouter isLoggedIn={Boolean(isLoggedIn)} userObj={userObj} /> : 'Initializing...'}
       <footer>&copy; ukss {new Date().getFullYear()}</footer>
     </>
   );

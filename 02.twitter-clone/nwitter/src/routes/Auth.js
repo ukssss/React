@@ -45,16 +45,16 @@ const Auth = () => {
 
     let provider;
 
-    if (name === 'google') {
-      provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(authService, provider);
-    } else if (name === 'github') {
-      provider = new GithubAuthProvider();
-      const result = await signInWithPopup(authService, provider);
+    try {
+      if (name === 'google') {
+        provider = new GoogleAuthProvider();
+      } else if (name === 'github') {
+        provider = new GithubAuthProvider();
+      }
+      await signInWithPopup(authService, provider);
+    } catch (error) {
+      setError(error.message);
     }
-
-    const data = await signInWithPopup(provider);
-    console.log(data);
   };
 
   return (
