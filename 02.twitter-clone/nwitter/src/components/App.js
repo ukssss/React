@@ -20,12 +20,7 @@ function App() {
     });
   }, []);
 
-  return (
-    <>
-      {init ? <AppRouter isLoggedIn={Boolean(isLoggedIn)} userObj={userObj} /> : 'Initializing...'}
-      <footer>&copy; ukss {new Date().getFullYear()}</footer>
-    </>
-  );
+  return <>{init ? <AppRouter isLoggedIn={Boolean(isLoggedIn)} userObj={userObj} /> : 'Initializing...'}</>;
 }
 
 export default App;
