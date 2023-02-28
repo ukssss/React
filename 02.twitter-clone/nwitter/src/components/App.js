@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AppRouter from './Router';
-import { onAuthStateChanged, updateProfile } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { authService } from 'fbase';
 
 function App() {
