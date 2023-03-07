@@ -1,42 +1,12 @@
 import React, { useState } from 'react';
-import { getAuth, createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { authService } from 'fbase';
+import AuthForm from 'components/AuthForm';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter, faGoogle, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 const Auth = () => {
-  const [inputs, setInputs] = useState({
-    email: '',
-    password: '',
-  });
-
-  const { email, password } = inputs;
-  const [newAccount, setNewAccount] = useState(true);
   const [error, setError] = useState('');
-
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  };
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const auth = getAuth();
-      let data;
-      if (newAccount) {
-        data = await createUserWithEmailAndPassword(auth, email, password);
-      } else {
-        data = await signInWithEmailAndPassword(auth, email, password);
-      }
-      console.log(data);
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
-  const toggleAccount = () => setNewAccount((prev) => !prev);
 
   const onSocialClick = async (e) => {
     const {
@@ -45,33 +15,28 @@ const Auth = () => {
 
     let provider;
 
-    if (name === 'google') {
-      provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(authService, provider);
-    } else if (name === 'github') {
-      provider = new GithubAuthProvider();
-      const result = await signInWithPopup(authService, provider);
+    try {
+      if (name === 'google') {
+        provider = new GoogleAuthProvider();
+      } else if (name === 'github') {
+        provider = new GithubAuthProvider();
+      }
+      await signInWithPopup(authService, provider);
+    } catch (error) {
+      setError(error.message);
     }
-
-    const data = await signInWithPopup(provider);
-    console.log(data);
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input name='email' type='text' placeholder='Email' required onChange={onChange} />
-        <input name='password' type='password' placeholder='Password' required onChange={onChange} />
-        <input type='submit' value={newAccount ? 'Create Account' : 'Log In'} />
-        {error}
-      </form>
-      <span onClick={toggleAccount}>{newAccount ? 'Sign In' : 'Create Account'}</span>
-      <div>
-        <button onClick={onSocialClick} name='google'>
-          Continue with Google
+    <div className='authContainer'>
+      <FontAwesomeIcon icon={faTwitter} color={'#04AAFF'} size='3x' style={{ marginBottom: 30 }} />
+      <AuthForm />
+      <div className='authBtns'>
+        <button onClick={onSocialClick} name='google' className='authBtn'>
+          Continue with Google <FontAwesomeIcon icon={faGoogle} />
         </button>
-        <button onClick={onSocialClick} name='github'>
-          Continue with Github
+        <button onClick={onSocialClick} name='github' className='authBtn'>
+          Continue with Github <FontAwesomeIcon icon={faGithub} />
         </button>
       </div>
     </div>
