@@ -7,6 +7,7 @@ function App() {
   let [matzip, setMatzip] = useState(['신림 24시 서울밥집', '낙성대 기절초풍왕순대', '서울대입구 산골']);
   let [good, setGood] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
+  let [modalNumber, setModalNumber] = useState(0);
 
   function handleChange() {
     let copy = [...matzip];
@@ -20,12 +21,21 @@ function App() {
     setMatzip(copy);
   }
 
-  function Modal() {
+  function Modal(props) {
     return (
       <div className='modal'>
-        <h4>제목</h4>
+        <h4>{props.title}</h4>
         <p>날짜</p>
         <p>상세내용</p>
+        <button
+          onClick={() => {
+            let copy = [...matzip];
+            copy[modalNumber] = '압구정로데오 더타코부스';
+            setMatzip(copy);
+          }}
+        >
+          글수정
+        </button>
       </div>
     );
   }
@@ -43,7 +53,14 @@ function App() {
         return (
           <div className='list' key={i}>
             <div className='title'>
-              <h4>{place}</h4>
+              <h4
+                onClick={() => {
+                  modal ? setModal(false) : setModal(true);
+                  setModalNumber(i);
+                }}
+              >
+                {place}
+              </h4>
               <span
                 onClick={() => {
                   let copy = [...good];
@@ -60,21 +77,19 @@ function App() {
         );
       })}
 
-      {modal ? <Modal /> : ''}
+      {modal ? <Modal title={matzip[modalNumber]} /> : ''}
     </div>
   );
 }
 
 export default App;
 
-// Map
-// 1. array 자료 갯수만큼 함수안의 코드를 실행해줌
-// 2. 함수의 파라미터는 array 안에 있던 자료이다.
-// 3. return 에 뭐 적으면 array 로 담아준다.
+// 부모 -> 자식 state 전송하려면 props 문법 사용
+// 1. <자식컴포넌트 작명={state이름}>
+// 2. props 파라미터 등록 후 props.작명 사용
 
-// 비슷한 html 반복생성 하려면 map() 사용하면 된다.
+// props 전송은 부모 -> 자식만 가능
 
-// map() 함수
-// 1. 왼쪽 array 자료만큼 내부코드 실행해줌
-// 2. return 오른쪽에 있는 걸 array 로 담아줌
-// 3. 유용한 파라미터 2개 사용가능
+// ! 컴포넌트 많아지면 props 쓰는게 귀찮아짐
+
+// 파라미터 문법은 다양한 기능을 하는 함수를 만들 때 사용함
