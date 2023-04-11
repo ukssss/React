@@ -5,12 +5,8 @@ import './App.css';
 
 function App() {
   let [matzip, setMatzip] = useState(['신림 24시 서울밥집', '낙성대 기절초풍왕순대', '서울대입구 산골']);
-  let [good, setGood] = useState(0);
+  let [good, setGood] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
-
-  function handleGood() {
-    setGood(good++);
-  }
 
   function handleChange() {
     let copy = [...matzip];
@@ -43,38 +39,26 @@ function App() {
       <button onClick={handleChange}>음식점 변경</button>
       <button onClick={handleGanada}>가나다순 정렬</button>
 
-      <div className='list'>
-        <h4
-          onClick={() => {
-            modal ? setModal(false) : setModal(true);
-          }}
-        >
-          {matzip[0]} <span onClick={handleGood}>👍🏻</span> {good}
-        </h4>
-        <p>2월 17일 발행</p>
-      </div>
-
-      <div className='list'>
-        <h4
-          onClick={() => {
-            modal ? setModal(false) : setModal(true);
-          }}
-        >
-          {matzip[1]}
-        </h4>
-        <p>2월 17일 발행</p>
-      </div>
-
-      <div className='list'>
-        <h4
-          onClick={() => {
-            modal ? setModal(false) : setModal(true);
-          }}
-        >
-          {matzip[2]}
-        </h4>
-        <p>2월 17일 발행</p>
-      </div>
+      {matzip.map(function (place, i) {
+        return (
+          <div className='list' key={i}>
+            <div className='title'>
+              <h4>{place}</h4>
+              <span
+                onClick={() => {
+                  let copy = [...good];
+                  copy[i]++;
+                  setGood(copy);
+                }}
+              >
+                👍🏻
+              </span>
+              <span>{good[i]}</span>
+            </div>
+            <p>2월 17일 발행</p>
+          </div>
+        );
+      })}
 
       {modal ? <Modal /> : ''}
     </div>
@@ -83,7 +67,14 @@ function App() {
 
 export default App;
 
-// 동적인 UI 만드는 step
-// 1. html css 로 미리 디자인 완성
-// 2. UI의 현재 상태를 state로 저장
-// 3. state에 따라 UI가 어떻게 보일지 저장 (조건문 등으로)
+// Map
+// 1. array 자료 갯수만큼 함수안의 코드를 실행해줌
+// 2. 함수의 파라미터는 array 안에 있던 자료이다.
+// 3. return 에 뭐 적으면 array 로 담아준다.
+
+// 비슷한 html 반복생성 하려면 map() 사용하면 된다.
+
+// map() 함수
+// 1. 왼쪽 array 자료만큼 내부코드 실행해줌
+// 2. return 오른쪽에 있는 걸 array 로 담아줌
+// 3. 유용한 파라미터 2개 사용가능

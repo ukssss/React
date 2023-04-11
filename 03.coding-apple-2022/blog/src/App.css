@@ -12,6 +12,14 @@ div {
   border-bottom: 1px solid grey;
 }
 
+.title {
+  margin-top: 15px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .modal {
   margin-top: 20px;
   padding: 20px;
