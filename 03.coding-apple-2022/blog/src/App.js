@@ -12,7 +12,15 @@ function App() {
   }
 
   function handleChange() {
-    setMatzip(['압구정로데오 웍셔너리', '낙성대 기절초풍왕순대', '서울대입구 산골']);
+    let copy = [...matzip];
+    copy[0] = '압구정로데오 웍셔너리';
+    setMatzip(copy);
+  }
+
+  function handleGanada() {
+    let copy = [...matzip];
+    copy.sort();
+    setMatzip(copy);
   }
 
   return (
@@ -21,7 +29,8 @@ function App() {
         <h4>ukss's blog</h4>
       </div>
 
-      <button onClick={handleChange}>🙋🏼‍♀️</button>
+      <button onClick={handleChange}>음식점 변경</button>
+      <button onClick={handleGanada}>가나다순 정렬</button>
 
       <div className='list'>
         <h4>
@@ -45,5 +54,4 @@ function App() {
 export default App;
 
 // 정리
-// - onClick 사용법, onClick={} 안엔 함수를 넣어야 한다.
-// - state 변경하는 법, 항상 state 변경함수 쓸 것 (새로운 state)
+// - state가 array/object면 독립적 카피본을 만들어서 수정해야 함
