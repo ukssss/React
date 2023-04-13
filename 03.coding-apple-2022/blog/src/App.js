@@ -8,6 +8,7 @@ function App() {
   let [good, setGood] = useState([0, 0, 0]);
   let [modal, setModal] = useState(false);
   let [modalNumber, setModalNumber] = useState(0);
+  let [inputValue, setInputValue] = useState('');
 
   function handleChange() {
     let copy = [...matzip];
@@ -27,15 +28,7 @@ function App() {
         <h4>{props.title}</h4>
         <p>날짜</p>
         <p>상세내용</p>
-        <button
-          onClick={() => {
-            let copy = [...matzip];
-            copy[modalNumber] = '압구정로데오 더타코부스';
-            setMatzip(copy);
-          }}
-        >
-          글수정
-        </button>
+        <button>글수정</button>
       </div>
     );
   }
@@ -60,22 +53,54 @@ function App() {
                 }}
               >
                 {place}
+                <span
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    let copy = [...good];
+                    copy[i]++;
+                    setGood(copy);
+                  }}
+                >
+                  👍🏻
+                </span>
+                {good[i]}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    let copy = [...matzip].filter((data) => {
+                      return data != place;
+                    });
+                    setMatzip(copy);
+                  }}
+                >
+                  삭제
+                </button>
               </h4>
-              <span
-                onClick={() => {
-                  let copy = [...good];
-                  copy[i]++;
-                  setGood(copy);
-                }}
-              >
-                👍🏻
-              </span>
-              <span>{good[i]}</span>
             </div>
+
             <p>2월 17일 발행</p>
           </div>
         );
       })}
+
+      <input
+        type='text'
+        onChange={(e) => {
+          setInputValue(e.target.value);
+        }}
+      />
+      <button
+        onClick={() => {
+          let copyMatzip = [...matzip];
+          let copyGood = [...good];
+          copyMatzip.push(inputValue);
+          copyGood.push(0);
+          setMatzip(copyMatzip);
+          setGood(copyGood);
+        }}
+      >
+        추가
+      </button>
 
       {modal ? <Modal title={matzip[modalNumber]} /> : ''}
     </div>
@@ -84,12 +109,16 @@ function App() {
 
 export default App;
 
-// 부모 -> 자식 state 전송하려면 props 문법 사용
-// 1. <자식컴포넌트 작명={state이름}>
-// 2. props 파라미터 등록 후 props.작명 사용
+// 오늘의 숙제 :
 
-// props 전송은 부모 -> 자식만 가능
+// 1. input에 뭐 입력하고 발행버튼누르면
 
-// ! 컴포넌트 많아지면 props 쓰는게 귀찮아짐
+// 블로그에 글이 하나 추가되는 기능을 만들어보십시오.
 
-// 파라미터 문법은 다양한 기능을 하는 함수를 만들 때 사용함
+// 2. 글마다 옆에 삭제버튼 하나씩 만들어놓고 삭제버튼누르면 글이 없어지는 기능을 만들어보십시오.
+
+// (힌트)
+
+// - html 직접 만질 필요는 없습니다. 지금 글제목 state만 바꾸면 html도 알아서 바뀌지 않겠습니까
+
+// - array에 자료를 추가하거나 삭제하는 문법은 모르면 구글찾아봐야지 생각한다고 나오는 것은 아닙니다.
