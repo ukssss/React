@@ -6,6 +6,8 @@ import './App.css';
 function App() {
   let [matzip, setMatzip] = useState(['신림 24시 서울밥집', '낙성대 기절초풍왕순대', '서울대입구 산골']);
   let [good, setGood] = useState([0, 0, 0]);
+  let [date, setDate] = useState(['2월 17일 발행', '3월 19일 발행', '4월 13일 발행']);
+
   let [modal, setModal] = useState(false);
   let [modalNumber, setModalNumber] = useState(0);
   let [inputValue, setInputValue] = useState('');
@@ -67,9 +69,8 @@ function App() {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    let copy = [...matzip].filter((data) => {
-                      return data != place;
-                    });
+                    let copy = [...matzip];
+                    copy.splice(i, 1);
                     setMatzip(copy);
                   }}
                 >
@@ -78,7 +79,7 @@ function App() {
               </h4>
             </div>
 
-            <p>2월 17일 발행</p>
+            <p>{date[i]}</p>
           </div>
         );
       })}
@@ -93,10 +94,22 @@ function App() {
         onClick={() => {
           let copyMatzip = [...matzip];
           let copyGood = [...good];
-          copyMatzip.push(inputValue);
-          copyGood.push(0);
-          setMatzip(copyMatzip);
-          setGood(copyGood);
+          let copyDate = [...date];
+
+          let now = new Date();
+
+          console.log(now);
+          if (inputValue != '') {
+            copyMatzip.push(inputValue);
+            copyGood.push(0);
+            copyDate.push(`${now.getMonth() + 1}월 ${now.getDate()}일 발행`);
+
+            setMatzip(copyMatzip);
+            setGood(copyGood);
+            setDate(copyDate);
+          } else {
+            alert('추가할 내용을 작성해주세요');
+          }
         }}
       >
         추가
@@ -109,16 +122,7 @@ function App() {
 
 export default App;
 
-// 오늘의 숙제 :
-
-// 1. input에 뭐 입력하고 발행버튼누르면
-
-// 블로그에 글이 하나 추가되는 기능을 만들어보십시오.
-
-// 2. 글마다 옆에 삭제버튼 하나씩 만들어놓고 삭제버튼누르면 글이 없어지는 기능을 만들어보십시오.
-
-// (힌트)
-
-// - html 직접 만질 필요는 없습니다. 지금 글제목 state만 바꾸면 html도 알아서 바뀌지 않겠습니까
-
-// - array에 자료를 추가하거나 삭제하는 문법은 모르면 구글찾아봐야지 생각한다고 나오는 것은 아닙니다.
+// 응용
+// 응용1. 글에 아무것도 입력안하고 발행버튼 누르는거 막으려면? O
+// 응용2. 글을 하나 추가하면 따봉갯수 개별적용하던 것도 이상해질 수 있다. O
+// 응용3. 날짜 데이터 추가 O
