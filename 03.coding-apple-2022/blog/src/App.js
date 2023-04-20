@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
@@ -33,6 +33,30 @@ function App() {
         <button>글수정</button>
       </div>
     );
+  }
+
+  class Modal2 extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {
+        name: 'kim',
+        age: 20,
+      };
+    }
+    render() {
+      return (
+        <div>
+          안녕{this.state.age}
+          <button
+            onClick={() => {
+              this.setState({ age: 21 });
+            }}
+          >
+            버튼이당
+          </button>
+        </div>
+      );
+    }
   }
 
   return (
@@ -116,13 +140,13 @@ function App() {
       </button>
 
       {modal ? <Modal title={matzip[modalNumber]} /> : ''}
+      <Modal2></Modal2>
     </div>
   );
 }
 
 export default App;
 
-// 응용
-// 응용1. 글에 아무것도 입력안하고 발행버튼 누르는거 막으려면? O
-// 응용2. 글을 하나 추가하면 따봉갯수 개별적용하던 것도 이상해질 수 있다. O
-// 응용3. 날짜 데이터 추가 O
+// 정리
+// class는 변수, 함수를 보관하는 통
+// extends는 기존 class 안에 있던 변수, 함수 복사해주는 문법
