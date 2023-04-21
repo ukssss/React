@@ -1,13 +1,28 @@
+import { useState } from 'react';
+import { Navbar, Container, Nav, Row, Col } from 'react-bootstrap';
 import './App.css';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import data from './data';
 
 function App() {
+  let [shoes] = useState(data);
+
+  function Product(props) {
+    return (
+      <>
+        {' '}
+        <Col>
+          <img src={props.img} alt='shoes' width='80%' />
+          <h4>{props.title}</h4>
+          <p>{props.content}</p>
+          <p>{props.price}</p>
+        </Col>
+        ;
+      </>
+    );
+  }
+
   return (
     <div className='App'>
-      <Button variant='primary'>버튼</Button>{' '}
       <Navbar bg='dark' variant='dark'>
         <Container>
           <Navbar.Brand href='#home'>욱스마켓</Navbar.Brand>
@@ -20,6 +35,16 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+      <div className='main-bg'></div>
+      <Container>
+        <Row>
+          {shoes.map((item) => {
+            return (
+              <Product key={item.id} img={item.img} title={item.title} content={item.content} price={item.price} />
+            );
+          })}
+        </Row>
+      </Container>
     </div>
   );
 }
