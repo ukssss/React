@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import data from './data';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
@@ -7,6 +9,7 @@ import About from './pages/About';
 import Event from './pages/Event';
 
 function App() {
+  let [shoes] = useState(data);
   let navigate = useNavigate();
 
   return (
@@ -34,8 +37,8 @@ function App() {
       </Navbar>
 
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/detail' element={<Detail />} />
+        <Route path='/' element={<Home shoes={shoes} />} />
+        <Route path='/detail/:id' element={<Detail shoes={shoes} />} />
         <Route path='/about' element={<About />}>
           <Route path='member' element={<div>멤버</div>} />
           <Route path='location' element={<div>위치</div>} />

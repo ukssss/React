@@ -1,21 +1,28 @@
-import data from '../data';
+import { useParams } from 'react-router-dom';
 
-function Detail() {
+function Detail(props) {
+  let { id } = useParams();
+  let product = props.shoes.find((item) => item.id === parseInt(id));
+
   return (
     <>
-      <div className='container'>
-        <div className='row'>
-          <div className='col-md-6'>
-            <img alt='shoes' src={data[0].img} width='100%' />
-          </div>
-          <div className='col-md-6'>
-            <h4 className='pt-5'>{data[0].title}</h4>
-            <p>{data[0].content}</p>
-            <p>{data[0].price.toLocaleString()}원</p>
-            <button className='btn btn-danger'>주문하기</button>
+      {product ? (
+        <div className='container'>
+          <div className='row'>
+            <div className='col-md-6'>
+              <img alt='shoes' src={product.img} width='100%' />
+            </div>
+            <div className='col-md-6'>
+              <h4 className='pt-5'>{product.title}</h4>
+              <p>{product.content}</p>
+              <p>{product.price.toLocaleString()}원</p>
+              <button className='btn btn-danger'>주문하기</button>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div>없는 제품입니다</div>
+      )}
     </>
   );
 }

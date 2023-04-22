@@ -1,10 +1,6 @@
-import { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import data from '../data';
 
-function Home() {
-  let [shoes] = useState(data);
-
+function Home(props) {
   function Product(props) {
     return (
       <>
@@ -25,7 +21,7 @@ function Home() {
       <div className='main-bg'></div>
       <Container>
         <Row>
-          {shoes.map((item) => {
+          {props.shoes.map((item) => {
             return (
               <Product key={item.id} img={item.img} title={item.title} content={item.content} price={item.price} />
             );
