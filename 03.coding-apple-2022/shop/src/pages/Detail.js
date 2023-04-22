@@ -1,13 +1,16 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
-
-let ColorBtn = styled.button`
-  background: ${(props) => props.bg};
-  color: ${(props) => (props.bg === 'blue' ? 'white' : 'black')};
-  padding: 10px;
-`;
+import '../Detail.module.css';
 
 function Detail(props) {
+  useEffect(() => {
+    setTimeout(() => {
+      setVisible(false);
+    }, 2000);
+  });
+
+  let [visible, setVisible] = useState(true);
+
   let { id } = useParams();
   let product = props.shoes.find((item) => item.id === parseInt(id));
 
@@ -15,8 +18,7 @@ function Detail(props) {
     <>
       {product ? (
         <div className='container'>
-          <ColorBtn bg='blue'>버튼</ColorBtn>
-
+          {visible ? <div className='alert alert-warning'>깍꿍</div> : ''}
           <div className='row'>
             <div className='col-md-6'>
               <img alt='shoes' src={product.img} width='100%' />
