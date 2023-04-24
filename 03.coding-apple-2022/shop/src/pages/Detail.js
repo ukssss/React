@@ -3,16 +3,33 @@ import { useParams } from 'react-router-dom';
 import '../Detail.module.css';
 
 function Detail(props) {
-  useEffect(() => {
-    setTimeout(() => {
-      setVisible(false);
-    }, 2000);
-  });
-
-  let [visible, setVisible] = useState(true);
-
   let { id } = useParams();
   let product = props.shoes.find((item) => item.id === parseInt(id));
+  let [visible, setVisible] = useState(true);
+  let [text, setText] = useState('');
+  let [alertText, setAlertText] = useState(false);
+
+  useEffect(() => {
+    let a = setTimeout(() => {
+      setVisible(false);
+    }, 2000);
+
+    return () => {
+      clearTimeout(a);
+    };
+  }, []);
+
+  const onChange = (e) => {
+    setText(e.keyCode);
+  };
+
+  useEffect(() => {
+    if (text >= 65 && text <= 122) {
+      setAlertText(true);
+    } else {
+      setAlertText(false);
+    }
+  }, [text]);
 
   return (
     <>
@@ -20,6 +37,14 @@ function Detail(props) {
         <div className='container'>
           {visible ? <div className='alert alert-warning'>깍꿍</div> : ''}
           <div className='row'>
+            <input onKeyDown={onChange} placeholder='숫자말고 다른거 넣으면 큰일나요' />
+            {alertText ? (
+              <div>
+                <span>숫자만 넣으세요 !!!</span>
+              </div>
+            ) : (
+              ''
+            )}
             <div className='col-md-6'>
               <img alt='shoes' src={product.img} width='100%' />
             </div>
