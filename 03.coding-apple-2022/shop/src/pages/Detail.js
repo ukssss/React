@@ -8,6 +8,17 @@ function Detail(props) {
   let [visible, setVisible] = useState(true);
   let [num, setNum] = useState('');
 
+  function popup() {
+    setTimeout(() => {
+      setVisible(false);
+    }, 2000);
+  }
+
+  useEffect(() => {
+    popup();
+    return clearTimeout(popup());
+  });
+
   useEffect(() => {
     if (isNaN(num)) {
       alert('숫자만 넣으세요 !');
