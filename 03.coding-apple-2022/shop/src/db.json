@@ -1,0 +1,27 @@
+{
+  "shoes": [
+    {
+      "id": 0,
+      "img": "/990jjj.png",
+      "title": "New Balance x JJJJound 990v3 Brown Black",
+      "content": "뉴발란스 x JJJ자운드 990v3 브라운 블랙",
+      "price": 795000
+    },
+
+    {
+      "id": 1,
+      "img": "/2002orange.png",
+      "title": "New Balance 2002R Rust Oxide",
+      "content": "뉴발란스 2002R 러스트 옥사이드",
+      "price": 130000
+    },
+
+    {
+      "id": 2,
+      "img": "/chicago.png",
+      "title": "Jordan 1 Retro High OG Chicago 2022",
+      "content": "조던 1 레트로 하이 OG 시카고 2022",
+      "price": 450000
+    }
+  ]
+}
