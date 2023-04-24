@@ -1,7 +1,7 @@
 {
   "shoes": [
     {
-      "id": 4,
+      "id": 5,
       "img": "/990jjj.png",
       "title": "New Balance x JJJJound 990v3 Brown Black",
       "content": "뉴발란스 x JJJ자운드 990v3 브라운 블랙",
@@ -9,7 +9,7 @@
     },
 
     {
-      "id": 5,
+      "id": 6,
       "img": "/2002orange.png",
       "title": "New Balance 2002R Rust Oxide",
       "content": "뉴발란스 2002R 러스트 옥사이드",
@@ -17,7 +17,7 @@
     },
 
     {
-      "id": 6,
+      "id": 7,
       "img": "/chicago.png",
       "title": "Jordan 1 Retro High OG Chicago 2022",
       "content": "조던 1 레트로 하이 OG 시카고 2022",

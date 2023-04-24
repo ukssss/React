@@ -27,7 +27,9 @@ function Home() {
           axios
             .get('http://localhost:4000/shoes')
             .then((result) => {
-              setShoes(data.concat(result.data));
+              let copy = [...shoes, ...result.data];
+              setShoes(copy);
+              console.log(copy);
             })
             .catch(() => {
               console.log('실패했다 ㅋㅋ');
@@ -40,7 +42,9 @@ function Home() {
         <Row>
           {shoes.map((item) => {
             return (
-              <Product key={item.id} img={item.img} title={item.title} content={item.content} price={item.price} />
+              <Col key={item.id}>
+                <Product img={item.img} title={item.title} content={item.content} price={item.price} />
+              </Col>
             );
           })}
         </Row>
