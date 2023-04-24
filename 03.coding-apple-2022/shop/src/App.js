@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import data from './data';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import './App.module.css';
+import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Detail from './pages/Detail';

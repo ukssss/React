@@ -1,9 +1,10 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useState } from 'react';
+import data from '../data';
 
-function Home(props) {
-  let [shoes, setShoes] = useState('');
+function Home() {
+  let [shoes, setShoes] = useState(data);
 
   function Product(props) {
     return (
@@ -21,42 +22,29 @@ function Home(props) {
   return (
     <>
       <div className='main-bg'></div>
-      <Container>
-        <Row>
-          {props.shoes.map((item) => {
-            return (
-              <Product key={item.id} img={item.img} title={item.title} content={item.content} price={item.price} />
-            );
-          })}
-        </Row>
-      </Container>
       <button
         onClick={() => {
           axios
             .get('http://localhost:4000/shoes')
             .then((result) => {
-              setShoes(result.data);
+              setShoes(data.concat(result.data));
             })
             .catch(() => {
               console.log('실패했다 ㅋㅋ');
             });
         }}
       >
-        버튼
+        더보기
       </button>
-      {shoes ? (
-        <Container>
-          <Row>
-            {Array.from(shoes).map((item) => {
-              return (
-                <Product key={item.id} img={item.img} title={item.title} content={item.content} price={item.price} />
-              );
-            })}
-          </Row>
-        </Container>
-      ) : (
-        ''
-      )}
+      <Container>
+        <Row>
+          {shoes.map((item) => {
+            return (
+              <Product key={item.id} img={item.img} title={item.title} content={item.content} price={item.price} />
+            );
+          })}
+        </Row>
+      </Container>
     </>
   );
 }
