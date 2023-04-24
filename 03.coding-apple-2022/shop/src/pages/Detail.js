@@ -6,30 +6,13 @@ function Detail(props) {
   let { id } = useParams();
   let product = props.shoes.find((item) => item.id === parseInt(id));
   let [visible, setVisible] = useState(true);
-  let [text, setText] = useState('');
-  let [alertText, setAlertText] = useState(false);
+  let [num, setNum] = useState('');
 
   useEffect(() => {
-    let a = setTimeout(() => {
-      setVisible(false);
-    }, 2000);
-
-    return () => {
-      clearTimeout(a);
-    };
-  }, []);
-
-  const onChange = (e) => {
-    setText(e.keyCode);
-  };
-
-  useEffect(() => {
-    if (text >= 65 && text <= 122) {
-      setAlertText(true);
-    } else {
-      setAlertText(false);
+    if (isNaN(num)) {
+      alert('숫자만 넣으세요 !');
     }
-  }, [text]);
+  }, [num]);
 
   return (
     <>
@@ -37,14 +20,12 @@ function Detail(props) {
         <div className='container'>
           {visible ? <div className='alert alert-warning'>깍꿍</div> : ''}
           <div className='row'>
-            <input onKeyDown={onChange} placeholder='숫자말고 다른거 넣으면 큰일나요' />
-            {alertText ? (
-              <div>
-                <span>숫자만 넣으세요 !!!</span>
-              </div>
-            ) : (
-              ''
-            )}
+            <input
+              onChange={(e) => {
+                setNum(e.target.value);
+              }}
+              placeholder='숫자말고 다른거 넣으면 큰일나요'
+            />
             <div className='col-md-6'>
               <img alt='shoes' src={product.img} width='100%' />
             </div>
