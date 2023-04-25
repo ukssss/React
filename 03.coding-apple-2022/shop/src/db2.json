@@ -1,0 +1,27 @@
+{
+  "shoes": [
+    {
+      "id": 5,
+      "img": "/getventure.png",
+      "title": "Asics Gel-Venture 6 Feather Grey Black",
+      "content": "아식스 젤 벤쳐 6 페더 그레이 블랙",
+      "price": 179000
+    },
+
+    {
+      "id": 6,
+      "img": "/yeezyform.png",
+      "title": "Adidas Yeezy Foam RNNR Sand",
+      "content": "아디다스 이지 폼 러너 샌드",
+      "price": 390000
+    },
+
+    {
+      "id": 7,
+      "img": "/xt6.png",
+      "title": "Salomon XT-6 Gore-Tex Black Ebony",
+      "content": "살로몬 XT-6 고어텍스 블랙 에보니",
+      "price": 334000
+    }
+  ]
+}
