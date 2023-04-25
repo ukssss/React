@@ -1,10 +1,12 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import data from '../data';
 
 function Home() {
   let [shoes, setShoes] = useState(data);
+  let [count, setCount] = useState(0);
+  let [visible, setVisible] = useState(false);
 
   function Product(props) {
     return (
@@ -19,25 +21,59 @@ function Home() {
     );
   }
 
+  useEffect(() => {
+    function loadingText() {
+      if (count) {
+        setVisible(true);
+      }
+      setTimeout(() => {
+        setVisible(false);
+      }, 2000);
+    }
+    loadingText();
+    return clearTimeout(loadingText());
+  }, [count]);
+
   return (
     <>
       <div className='main-bg'></div>
-      <button
-        onClick={() => {
-          axios
-            .get('http://localhost:4000/shoes')
-            .then((result) => {
-              let copy = [...shoes, ...result.data];
-              setShoes(copy);
-              console.log(copy);
-            })
-            .catch(() => {
-              console.log('실패했다 ㅋㅋ');
-            });
-        }}
-      >
-        더보기
-      </button>
+      {count !== 2 ? (
+        <button
+          onClick={() => {
+            if (count === 0) {
+              axios
+                .get('http://localhost:4000/shoes')
+                .then((result) => {
+                  let copy = [...shoes, ...result.data];
+                  setShoes(copy);
+                  console.log(copy);
+                })
+                .catch(() => {
+                  console.log('실패했다 ㅋㅋ');
+                });
+              setCount(1);
+            } else if (count === 1) {
+              axios
+                .get('http://localhost:4001/shoes')
+                .then((result) => {
+                  let copy = [...shoes, ...result.data];
+                  setShoes(copy);
+                  console.log(copy);
+                })
+                .catch(() => {
+                  console.log('실패했다 ㅋㅋ');
+                });
+              setCount(2);
+            }
+          }}
+        >
+          더보기
+        </button>
+      ) : (
+        ''
+      )}
+      {visible ? <div>로딩중 ⚡︎</div> : ''}
+
       <Container>
         <Row>
           {shoes.map((item) => {
