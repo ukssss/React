@@ -40,9 +40,9 @@ function Detail(props) {
   return (
     <>
       {product ? (
-        <div className='container'>
+        <div className={`container ${styles.start} ${load}`}>
           {visible ? <div className='alert alert-warning'>깍꿍</div> : ''}
-          <div className={`row ${styles.start} ${load}`}>
+          <div className='row'>
             <input
               onChange={(e) => {
                 setNum(e.target.value);
