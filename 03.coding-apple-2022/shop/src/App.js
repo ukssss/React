@@ -3,6 +3,7 @@ import data from './data';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import './App.css';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+
 import Home from './pages/Home';
 import Detail from './pages/Detail';
 import About from './pages/About';
