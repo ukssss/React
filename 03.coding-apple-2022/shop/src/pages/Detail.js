@@ -2,8 +2,10 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import styles from '../Detail.module.css';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Context1 } from '../App';
+import { addCart } from '../store';
 
 function Detail(props) {
   let { id } = useParams();
@@ -12,6 +14,9 @@ function Detail(props) {
   let [num, setNum] = useState('');
   let [tab, setTab] = useState(0);
   let [load, setLoad] = useState('');
+
+  let state = useSelector((state) => state);
+  let dispatch = useDispatch();
 
   function popup() {
     setTimeout(() => {
@@ -58,7 +63,14 @@ function Detail(props) {
               <h4 className='pt-5'>{product.title}</h4>
               <p>{product.content}</p>
               <p>{product.price.toLocaleString()}원</p>
-              <button className='btn btn-danger'>주문하기</button>
+              <button
+                className='btn btn-danger'
+                onClick={() => {
+                  dispatch(addCart());
+                }}
+              >
+                주문하기
+              </button>
             </div>
           </div>
           <Nav variant='tabs' defaultActiveKey='link0'>

@@ -1,16 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-
-let user = createSlice({
-  name: 'user',
-  initialState: 'handsome',
-  reducers: {
-    changeName(state) {
-      return 'ukss ' + state;
-    },
-  },
-});
-
-export let { changeName } = user.actions;
+import user from './store/userSlice';
 
 let cart = createSlice({
   name: 'cart',
@@ -18,9 +7,18 @@ let cart = createSlice({
     { id: 0, name: 'New Balance 993 Made in USA Grey - D Standard', count: 2 },
     { id: 2, name: 'Maison Mihara Yasuhiro Blakey OG Sole Canvas Low-top Sneakers Black White', count: 1 },
   ],
+  reducers: {
+    increase(state, i) {
+      state[i.payload].count++;
+    },
+    addCart(state) {
+      state.push({ id: 1, name: 'Nike x Peaceminusone Kwondo1 Black and White', count: 3 });
+      console.log(state[1]);
+    },
+  },
 });
 
-export let { countUp } = cart.actions;
+export let { increase, addCart } = cart.actions;
 
 export default configureStore({
   reducer: {
