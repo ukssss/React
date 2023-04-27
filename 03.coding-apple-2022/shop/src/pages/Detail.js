@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import '../Detail.module.css';
 import { Nav } from 'react-bootstrap';
+import styles from '../Detail.module.css';
 
 function Detail(props) {
   let { id } = useParams();
@@ -9,6 +9,7 @@ function Detail(props) {
   let [visible, setVisible] = useState(true);
   let [num, setNum] = useState('');
   let [tab, setTab] = useState(0);
+  let [load, setLoad] = useState('');
 
   function popup() {
     setTimeout(() => {
@@ -27,10 +28,19 @@ function Detail(props) {
     }
   }, [num]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoad(`${styles.end}`);
+    }, 200);
+    return () => {
+      setLoad('');
+    };
+  }, []);
+
   return (
     <>
       {product ? (
-        <div className='container'>
+        <div className={`container ${styles.start} ${load}`}>
           {visible ? <div className='alert alert-warning'>깍꿍</div> : ''}
           <div className='row'>
             <input
@@ -81,34 +91,53 @@ function Detail(props) {
               </Nav.Link>
             </Nav.Item>
           </Nav>
-          {
-            [
-              <div>
-                Aute nulla anim non proident. Sit officia officia proident nostrud consequat quis est culpa cupidatat
-                laboris duis eiusmod sunt veniam. Voluptate exercitation occaecat nostrud nostrud est elit ex magna do
-                et exercitation. Velit culpa anim velit sunt sunt eiusmod adipisicing qui cillum pariatur amet.
-                Reprehenderit nostrud consequat laborum nulla reprehenderit do incididunt tempor enim consectetur. Do do
-                non ea mollit officia labore et minim ex culpa quis.
-              </div>,
-              <div>
-                Dolore culpa duis fugiat id commodo exercitation irure occaecat culpa tempor ea. Cupidatat et enim
-                dolore aute amet. Duis labore esse Lorem ullamco elit sunt eu. Dolor do tempor veniam dolore nulla
-                laborum culpa ipsum mollit irure aliquip irure. Dolore aliquip dolor exercitation laborum sit. Magna
-                duis in voluptate consectetur duis. Minim irure reprehenderit non adipisicing laboris adipisicing enim
-                cillum magna veniam.
-              </div>,
-              <div>
-                Mollit Lorem quis amet quis sunt ad. Excepteur occaecat proident ad sunt enim minim. Eu duis eu magna
-                amet incididunt id nisi veniam ad nulla sit consequat.
-              </div>,
-            ][tab]
-          }
+          <TabContent tab={tab} />
         </div>
       ) : (
         <div>없는 제품입니다</div>
       )}
     </>
   );
+
+  function TabContent(props) {
+    let [fade, setFade] = useState();
+
+    useEffect(() => {
+      setTimeout(() => {
+        setFade(`${styles.end}`);
+      }, 100);
+
+      return () => {
+        setFade('');
+      };
+    }, [props.tab]);
+
+    return (
+      <div className={`${styles.start} ${fade}`}>
+        {
+          [
+            <div>
+              Aute nulla anim non proident. Sit officia officia proident nostrud consequat quis est culpa cupidatat
+              laboris duis eiusmod sunt veniam. Voluptate exercitation occaecat nostrud nostrud est elit ex magna do et
+              exercitation. Velit culpa anim velit sunt sunt eiusmod adipisicing qui cillum pariatur amet. Reprehenderit
+              nostrud consequat laborum nulla reprehenderit do incididunt tempor enim consectetur. Do do non ea mollit
+              officia labore et minim ex culpa quis.
+            </div>,
+            <div>
+              Dolore culpa duis fugiat id commodo exercitation irure occaecat culpa tempor ea. Cupidatat et enim dolore
+              aute amet. Duis labore esse Lorem ullamco elit sunt eu. Dolor do tempor veniam dolore nulla laborum culpa
+              ipsum mollit irure aliquip irure. Dolore aliquip dolor exercitation laborum sit. Magna duis in voluptate
+              consectetur duis. Minim irure reprehenderit non adipisicing laboris adipisicing enim cillum magna veniam.
+            </div>,
+            <div>
+              Mollit Lorem quis amet quis sunt ad. Excepteur occaecat proident ad sunt enim minim. Eu duis eu magna amet
+              incididunt id nisi veniam ad nulla sit consequat.
+            </div>,
+          ][tab]
+        }
+      </div>
+    );
+  }
 }
 
 export default Detail;
