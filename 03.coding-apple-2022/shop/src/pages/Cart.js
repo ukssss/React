@@ -1,35 +1,33 @@
 import { Table } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 function Cart() {
+  let store = useSelector((state) => {
+    return state;
+  });
+
+  console.log(store.cart);
+
   return (
     <div>
       <Table>
         <thead>
           <tr>
-            <th>#</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
+            <th>id</th>
+            <th>name</th>
+            <th>count</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td colSpan={2}>Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          {store.cart.map((item) => {
+            return (
+              <tr>
+                <td>{item.id}</td>
+                <td>{item.name}</td>
+                <td>{item.count}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
     </div>
