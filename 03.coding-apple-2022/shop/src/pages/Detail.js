@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 import styles from '../Detail.module.css';
+
+import { Context1 } from '../App';
 
 function Detail(props) {
   let { id } = useParams();
@@ -91,7 +93,7 @@ function Detail(props) {
               </Nav.Link>
             </Nav.Item>
           </Nav>
-          <TabContent tab={tab} />
+          <TabContent tab={tab} product={product} />
         </div>
       ) : (
         <div>없는 제품입니다</div>
@@ -99,8 +101,9 @@ function Detail(props) {
     </>
   );
 
-  function TabContent(props) {
+  function TabContent({ tab, product }) {
     let [fade, setFade] = useState();
+    let { quantity } = useContext(Context1);
 
     useEffect(() => {
       setTimeout(() => {
@@ -110,19 +113,13 @@ function Detail(props) {
       return () => {
         setFade('');
       };
-    }, [props.tab]);
+    }, [tab]);
 
     return (
       <div className={`${styles.start} ${fade}`}>
         {
           [
-            <div>
-              Aute nulla anim non proident. Sit officia officia proident nostrud consequat quis est culpa cupidatat
-              laboris duis eiusmod sunt veniam. Voluptate exercitation occaecat nostrud nostrud est elit ex magna do et
-              exercitation. Velit culpa anim velit sunt sunt eiusmod adipisicing qui cillum pariatur amet. Reprehenderit
-              nostrud consequat laborum nulla reprehenderit do incididunt tempor enim consectetur. Do do non ea mollit
-              officia labore et minim ex culpa quis.
-            </div>,
+            <div>{quantity}</div>,
             <div>
               Dolore culpa duis fugiat id commodo exercitation irure occaecat culpa tempor ea. Cupidatat et enim dolore
               aute amet. Duis labore esse Lorem ullamco elit sunt eu. Dolor do tempor veniam dolore nulla laborum culpa
