@@ -6,8 +6,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Detail from './pages/Detail';
-import About from './pages/About';
-import Event from './pages/Event';
+import Cart from './pages/Cart';
 
 export let Context1 = createContext();
 
@@ -51,14 +50,9 @@ function App() {
             </Context1.Provider>
           }
         />
-        <Route path='/about' element={<About />}>
-          <Route path='member' element={<div>멤버</div>} />
-          <Route path='location' element={<div>위치</div>} />
-        </Route>
-        <Route path='/event' element={<Event />}>
-          <Route path='one' element={<span>첫 주문시 양배추즙 서비스</span>} />
-          <Route path='two' element={<span>생일기념 쿠폰받기</span>} />
-        </Route>
+
+        <Route path='/cart' element={<Cart />} />
+
         <Route path='*' element={<div>404 Error</div>} />
       </Routes>
     </div>
