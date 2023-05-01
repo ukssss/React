@@ -8,17 +8,33 @@ let cart = createSlice({
     { id: 2, name: 'Maison Mihara Yasuhiro Blakey OG Sole Canvas Low-top Sneakers Black White', count: 1 },
   ],
   reducers: {
-    increase(state, i) {
-      state[i.payload].count++;
+    increase(state, action) {
+      let product = action.payload;
+      let num = state.findIndex((cart) => {
+        return cart.id === product.id;
+      });
+      state[num].count++;
     },
-    addCart(state) {
-      state.push({ id: 1, name: 'Nike x Peaceminusone Kwondo1 Black and White', count: 3 });
-      console.log(state[1]);
+    addCart(state, action) {
+      let product = action.payload;
+      let num = state.findIndex((cart) => {
+        return cart.id === product.id;
+      });
+
+      if (num === -1) state.push(action.payload);
+      else state[num].count++;
+    },
+    removeCart(state, action) {
+      let product = action.payload;
+      let num = state.findIndex((cart) => {
+        return cart.id === product.id;
+      });
+      state.splice(num, 1);
     },
   },
 });
 
-export let { increase, addCart } = cart.actions;
+export let { increase, addCart, removeCart } = cart.actions;
 
 export default configureStore({
   reducer: {

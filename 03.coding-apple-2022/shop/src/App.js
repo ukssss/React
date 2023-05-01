@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import data from './data';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import './App.css';
@@ -12,8 +12,6 @@ export let Context1 = createContext();
 
 function App() {
   let [shoes] = useState(data);
-  let [quantity, setQuantity] = useState([10, 11, 12]);
-
   let navigate = useNavigate();
 
   return (
@@ -36,6 +34,13 @@ function App() {
             >
               Detail
             </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate('/cart');
+              }}
+            >
+              Cart
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
@@ -45,7 +50,7 @@ function App() {
         <Route
           path='/detail/:id'
           element={
-            <Context1.Provider value={{ quantity, shoes }}>
+            <Context1.Provider value={{ shoes }}>
               <Detail shoes={shoes} />
             </Context1.Provider>
           }
