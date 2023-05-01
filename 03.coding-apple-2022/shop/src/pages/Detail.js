@@ -24,6 +24,20 @@ function Detail(props) {
   }
 
   useEffect(() => {
+    let visitHistory = localStorage.getItem('watched');
+
+    if (visitHistory === null) {
+      visitHistory = [];
+    } else {
+      visitHistory = JSON.parse(visitHistory);
+    }
+    visitHistory.push(id);
+    visitHistory = new Set(visitHistory);
+    visitHistory = [...visitHistory];
+    localStorage.setItem('watched', JSON.stringify(visitHistory));
+  }, [id]);
+
+  useEffect(() => {
     popup();
     return clearTimeout(popup());
   });
