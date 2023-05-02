@@ -2,7 +2,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import data from '../data';
-import { Link, useNavigate, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Home() {
   let [shoes, setShoes] = useState(data);
