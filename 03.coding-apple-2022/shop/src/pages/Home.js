@@ -2,6 +2,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import data from '../data';
+import { Link, useNavigate, NavLink } from 'react-router-dom';
 
 function Home() {
   let [shoes, setShoes] = useState(data);
@@ -79,7 +80,9 @@ function Home() {
           {shoes.map((item) => {
             return (
               <Col key={item.id}>
-                <Product img={item.img} title={item.title} content={item.content} price={item.price} />
+                <NavLink to={`/detail/${item.id}`}>
+                  <Product img={item.img} title={item.title} content={item.content} price={item.price} />
+                </NavLink>
               </Col>
             );
           })}

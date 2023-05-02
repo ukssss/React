@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import data from './data';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 import './App.css';
@@ -7,12 +7,21 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Detail from './pages/Detail';
 import Cart from './pages/Cart';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 export let Context1 = createContext();
 
 function App() {
   let [shoes] = useState(data);
+
   let navigate = useNavigate();
+
+  let result = useQuery('작명', () =>
+    axios.get('http://localhost:4002/users').then((a) => {
+      return a.data[0];
+    })
+  );
 
   return (
     <div className='App'>
@@ -27,13 +36,7 @@ function App() {
             >
               Home
             </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                navigate('/detail');
-              }}
-            >
-              Detail
-            </Nav.Link>
+
             <Nav.Link
               onClick={() => {
                 navigate('/cart');
@@ -42,6 +45,11 @@ function App() {
               Cart
             </Nav.Link>
           </Nav>
+          <div className='test'>
+            {result.isLoading && '로딩중'}
+            {result.error && '에러남'}
+            {result.data && result.data.name}
+          </div>
         </Container>
       </Navbar>
 
