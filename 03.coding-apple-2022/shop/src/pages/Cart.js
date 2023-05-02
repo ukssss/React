@@ -1,15 +1,30 @@
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeName, changeAge } from '../store/userSlice';
+import { changeAge } from '../store/userSlice';
 import { increase, removeCart } from '../store';
+import { useState, memo } from 'react';
+
+let Child = memo(function () {
+  console.log('재렌더링됨');
+  return <div>자식임</div>;
+});
 
 function Cart() {
   let state = useSelector((state) => state);
+  let [count, setCount] = useState(0);
 
   let dispatch = useDispatch();
 
   return (
     <div>
+      <Child />
+      <button
+        onClick={() => {
+          setCount(count + 1);
+        }}
+      >
+        +
+      </button>
       <h4>
         {state.user.name} {state.user.age} 의 장바구니
       </h4>
@@ -58,19 +73,6 @@ function Cart() {
               </td>
             </tr>
           ))}
-          <tr>
-            <td>#</td>
-            <td>{state.user.name}</td>
-            <td>
-              <button
-                onClick={() => {
-                  dispatch(changeName());
-                }}
-              >
-                +
-              </button>
-            </td>
-          </tr>
         </tbody>
       </Table>
     </div>
@@ -78,3 +80,6 @@ function Cart() {
 }
 
 export default Cart;
+
+// memo() => 컴포넌트 불필요한 재렌더링 막기
+// useMemo() => 컴포넌트 로드시 1회만 실행하고 싶은 코드가 있을 경우 사용
