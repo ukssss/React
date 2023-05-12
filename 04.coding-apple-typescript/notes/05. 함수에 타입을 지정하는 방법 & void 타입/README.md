@@ -80,7 +80,7 @@ function 함수(x: number | string) {
 }
 ```
 
-<img src="./src/unionTypeError1.png" style="width:700px">
+<img src="./src/uniontypeError1.png" style="width:700px">
 
 타입스크립트에서는 변수의 타입이 number | string 과 같은 Union Type 인 경우 자료 조작을 금지시킨다.
 해당 파라미터의 타입이 확실하지 않으니 파라미터 조작을 막고 금지하는 것이다.
