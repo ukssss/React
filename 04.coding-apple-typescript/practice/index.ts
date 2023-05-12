@@ -1,24 +1,23 @@
-let 이름: string = 'ukss';
-let 나이: number = 26;
-let 결혼유무: boolean = false;
+let 회원: number | string = 123;
 
-let 회원목록: string[] = ['ukss', 'hong'];
-let 회원목록2: { member1: string; member2: string } = { member1: 'ukss', member2: 'hong' };
-let 회원목록3 = 'ukss';
-let 회원목록4 = 26;
+let 어레이: (number | string)[] = [1, '2', 3];
+let 오브젝트: { a: string | number } = { a: 123 };
 
-// 과제
-// Q1
-const nickname = 'ukss';
-const age = 26;
-const hometown = 'masan';
+let 나이: string | number;
 
-// Q2
-const playlist: { title: string; singer: string } = { title: '외딴섬 로맨틱', singer: 'CartheGarden' };
+let 이름: unknown;
 
-// Q3
-let project: { member: string[]; days: number; started: boolean } = {
-  member: ['kim', 'park'],
-  days: 30,
-  started: true,
+// 숙제 1
+let user: string = 'kim';
+let age: undefined | number = undefined;
+let married: boolean = false;
+let 철수: (string | number | undefined | boolean)[] = [user, age, married];
+
+// 숙제 2
+let 학교: { score: (number | boolean)[]; teacher: string; friend: string | string[] } = {
+  score: [100, 97, 84],
+  teacher: 'Phil',
+  friend: 'John',
 };
+학교.score[4] = false;
+학교.friend = ['Lee', 학교.teacher];
