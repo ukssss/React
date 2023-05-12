@@ -1,23 +1,46 @@
-let 회원: number | string = 123;
+// hw 1
 
-let 어레이: (number | string)[] = [1, '2', 3];
-let 오브젝트: { a: string | number } = { a: 123 };
+function 함수(x?: string): void {
+  if (x) {
+    console.log(`안녕하세요 ${x}`);
+  } else {
+    console.log('이름이 없습니다');
+  }
+}
 
-let 나이: string | number;
+함수();
 
-let 이름: unknown;
+// hw 2
 
-// 숙제 1
-let user: string = 'kim';
-let age: undefined | number = undefined;
-let married: boolean = false;
-let 철수: (string | number | undefined | boolean)[] = [user, age, married];
+function 함수2(x: number | string): number {
+  let arr = x.toString().split('');
+  return arr.length;
+}
 
-// 숙제 2
-let 학교: { score: (number | boolean)[]; teacher: string; friend: string | string[] } = {
-  score: [100, 97, 84],
-  teacher: 'Phil',
-  friend: 'John',
-};
-학교.score[4] = false;
-학교.friend = ['Lee', 학교.teacher];
+console.log(함수2('123'));
+
+// hw 2 선생님 답안
+
+function 함수3(x: number | string): number {
+  return x.toString().length;
+}
+
+console.log(함수3(123));
+
+// hw 3
+
+function 결혼가능확률(월소득: number, 집보유여부: boolean, 매력점수: string): string | void {
+  let cnt = 월소득;
+  if (집보유여부) {
+    cnt += 500;
+  }
+  if (매력점수 === '상') {
+    cnt += 100;
+  }
+  if (cnt >= 600) {
+    return '결혼가능';
+  }
+}
+
+console.log(결혼가능확률(700, false, '중'));
+console.log(결혼가능확률(100, false, '상'));
