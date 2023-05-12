@@ -1,24 +1,46 @@
-let 이름: string = 'ukss';
-let 나이: number = 26;
-let 결혼유무: boolean = false;
+// hw 1
 
-let 회원목록: string[] = ['ukss', 'hong'];
-let 회원목록2: { member1: string; member2: string } = { member1: 'ukss', member2: 'hong' };
-let 회원목록3 = 'ukss';
-let 회원목록4 = 26;
+function 함수(x?: string): void {
+  if (x) {
+    console.log(`안녕하세요 ${x}`);
+  } else {
+    console.log('이름이 없습니다');
+  }
+}
 
-// 과제
-// Q1
-const nickname = 'ukss';
-const age = 26;
-const hometown = 'masan';
+함수();
 
-// Q2
-const playlist: { title: string; singer: string } = { title: '외딴섬 로맨틱', singer: 'CartheGarden' };
+// hw 2
 
-// Q3
-let project: { member: string[]; days: number; started: boolean } = {
-  member: ['kim', 'park'],
-  days: 30,
-  started: true,
-};
+function 함수2(x: number | string): number {
+  let arr = x.toString().split('');
+  return arr.length;
+}
+
+console.log(함수2('123'));
+
+// hw 2 선생님 답안
+
+function 함수3(x: number | string): number {
+  return x.toString().length;
+}
+
+console.log(함수3(123));
+
+// hw 3
+
+function 결혼가능확률(월소득: number, 집보유여부: boolean, 매력점수: string): string | void {
+  let cnt = 월소득;
+  if (집보유여부) {
+    cnt += 500;
+  }
+  if (매력점수 === '상') {
+    cnt += 100;
+  }
+  if (cnt >= 600) {
+    return '결혼가능';
+  }
+}
+
+console.log(결혼가능확률(700, false, '중'));
+console.log(결혼가능확률(100, false, '상'));
