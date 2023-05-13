@@ -1,7 +1,14 @@
-var girl = {
-    name: 'karina',
+var 접니다;
+function 함수(a) {
+    return 1;
+}
+함수('hello');
+function 가위바위보(x) {
+    return [x];
+}
+가위바위보('가위');
+var 자료 = {
+    name: 'ukss',
 };
-var position = { x: 10, y: 20 };
-var hw2Answer = { color: 'red', size: 10, position: [1, 2] };
-var hw3Answer = { name: 'ukss', phone: 1234, email: '1872003115su@gmail.com' };
-var hw4Answer = { name: 'ukss', phone: 1234, email: '1872003115su@gmail.com', adult: true };
+function 자료함수(a) { }
+자료함수(자료.name);
