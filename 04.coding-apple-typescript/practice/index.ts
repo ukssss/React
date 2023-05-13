@@ -1,8 +1,21 @@
-function 함수(x: number | string) {
-  let array: number[] = [];
-  array[0] = x as number;
+let 접니다: '머리풍성' | '커플';
+
+function 함수(a: 'hello'): 1 | 0 {
+  return 1;
 }
 
-let 이름: string = 'ukss';
+함수('hello');
 
-함수(123);
+function 가위바위보(x: '가위' | '바위' | '보'): ('가위' | '바위' | '보')[] {
+  return [x];
+}
+
+가위바위보('가위');
+
+let 자료 = {
+  name: 'ukss',
+} as const;
+
+function 자료함수(a: 'ukss') {}
+
+자료함수(자료.name);
