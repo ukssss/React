@@ -1,30 +1,59 @@
-let title = document.querySelector('#title');
-if (title?.innerHTML) {
-  title.innerHTML = '반가워요';
+class Person {
+  name: string;
+  constructor(a: string) {
+    this.name = a;
+  }
+
+  test(a: string) {
+    console.log(`안녕 ${a}`);
+  }
 }
 
-let link = document.querySelector('.link');
-if (link instanceof HTMLAnchorElement) {
-  link.href = 'https://www.kakao.com';
-}
-
-let button = document.querySelector('#button');
-button?.addEventListener('click', function () {
-  alert('메렁어엉ㅇ~');
-});
+let human1 = new Person('ukss');
+let human2 = new Person('hong');
 
 // hw1
 
-let img = document.querySelector('.img');
-if (img instanceof HTMLImageElement) {
-  img.src = './src/new.jpg';
+class Car {
+  model: string;
+  price: number;
+  constructor(a: string, b: number) {
+    this.model = a;
+    this.price = b;
+  }
+  tax(): number {
+    return this.price / 10;
+  }
 }
+
+let car1 = new Car('소나타 디 엣지', 4000);
+console.log(car1);
+console.log(car1.tax());
 
 // hw2
 
-let naver = document.querySelectorAll('.naver');
-naver.forEach((a) => {
-  if (a instanceof HTMLAnchorElement) {
-    a.href = 'https://www.kakao.com';
+class Word {
+  num;
+  str;
+  constructor(...param: (number | string)[]) {
+    const num: number[] = [];
+    const str: string[] = [];
+
+    param.forEach((el) => {
+      if (typeof el === 'number') {
+        num.push(el);
+      } else if (typeof el === 'string') {
+        str.push(el);
+      } else {
+        return;
+      }
+    });
+
+    this.num = num;
+    this.str = str;
   }
-});
+}
+
+let obj = new Word('kim', 3, 5, 'park');
+console.log(obj.num);
+console.log(obj.str);
