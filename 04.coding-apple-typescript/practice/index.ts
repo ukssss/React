@@ -1,21 +1,59 @@
-let 접니다: '머리풍성' | '커플';
+class Person {
+  name: string;
+  constructor(a: string) {
+    this.name = a;
+  }
 
-function 함수(a: 'hello'): 1 | 0 {
-  return 1;
+  test(a: string) {
+    console.log(`안녕 ${a}`);
+  }
 }
 
-함수('hello');
+let human1 = new Person('ukss');
+let human2 = new Person('hong');
 
-function 가위바위보(x: '가위' | '바위' | '보'): ('가위' | '바위' | '보')[] {
-  return [x];
+// hw1
+
+class Car {
+  model: string;
+  price: number;
+  constructor(a: string, b: number) {
+    this.model = a;
+    this.price = b;
+  }
+  tax(): number {
+    return this.price / 10;
+  }
 }
 
-가위바위보('가위');
+let car1 = new Car('소나타 디 엣지', 4000);
+console.log(car1);
+console.log(car1.tax());
 
-let 자료 = {
-  name: 'ukss',
-} as const;
+// hw2
 
-function 자료함수(a: 'ukss') {}
+class Word {
+  num;
+  str;
+  constructor(...param: (number | string)[]) {
+    const num: number[] = [];
+    const str: string[] = [];
 
-자료함수(자료.name);
+    param.forEach((el) => {
+      if (typeof el === 'number') {
+        num.push(el);
+      } else if (typeof el === 'string') {
+        str.push(el);
+      } else {
+        return;
+      }
+    });
+
+    this.num = num;
+    this.str = str;
+  }
+}
+
+let obj = new Word('kim', 3, 5, 'park');
+console.log(obj.num);
+console.log(obj.str);
