@@ -5,7 +5,7 @@
 ## Table of Contents
 
 - [Function Type](#function-type)
-- [methos 안에 타입지정 하기](#methods-안에-타입지정-하기)
+- [methods 안에 타입지정 하기](#methods-안에-타입지정-하기)
 
 ### Function Type
 
