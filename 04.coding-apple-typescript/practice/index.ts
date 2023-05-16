@@ -1,59 +1,66 @@
-class Person {
-  name: string;
-  constructor(a: string) {
-    this.name = a;
-  }
+type Animal = { name: string };
+type Cat = { age: number } & Animal;
 
-  test(a: string) {
-    console.log(`안녕 ${a}`);
-  }
+interface 학생인터 {
+  name: string;
 }
 
-let human1 = new Person('ukss');
-let human2 = new Person('hong');
+interface 학생인터 {
+  // 중복 선언 가능 (합쳐짐)
+  score?: number;
+}
+
+interface 선생인터 extends 학생인터 {
+  age: number;
+}
+
+let 학생: 학생인터 = { name: 'kim' };
+let 선생: 선생인터 = { name: 'kim', age: 20 };
 
 // hw1
 
-class Car {
-  model: string;
-  price: number;
-  constructor(a: string, b: number) {
-    this.model = a;
-    this.price = b;
-  }
-  tax(): number {
-    return this.price / 10;
-  }
+interface Product {
+  brand: string;
+  serialNumber: number;
+  model: string[];
 }
 
-let car1 = new Car('소나타 디 엣지', 4000);
-console.log(car1);
-console.log(car1.tax());
+let 상품: Product = { brand: 'Samsung', serialNumber: 1360, model: ['TV', 'phone'] };
 
 // hw2
 
-class Word {
-  num;
-  str;
-  constructor(...param: (number | string)[]) {
-    const num: number[] = [];
-    const str: string[] = [];
-
-    param.forEach((el) => {
-      if (typeof el === 'number') {
-        num.push(el);
-      } else if (typeof el === 'string') {
-        str.push(el);
-      } else {
-        return;
-      }
-    });
-
-    this.num = num;
-    this.str = str;
-  }
+interface Cart {
+  product: string;
+  price: number;
 }
 
-let obj = new Word('kim', 3, 5, 'park');
-console.log(obj.num);
-console.log(obj.str);
+let 장바구니: Cart[] = [
+  { product: '청소기', price: 7000 },
+  { product: '삼다수', price: 800 },
+];
+
+// hw3
+
+interface MoreCart extends Cart {
+  card: boolean;
+}
+
+let 장바구니2: MoreCart[] = [{ product: '청소기', price: 7000, card: false }];
+
+// hw4
+
+interface CalType {
+  plus: (a: number, b: number) => number;
+  minus: (a: number, b: number) => number;
+}
+
+let calculator: CalType = {
+  plus(a, b) {
+    return a + b;
+  },
+  minus(a, b) {
+    return a - b;
+  },
+};
+
+console.log(calculator.minus(3, 2));
