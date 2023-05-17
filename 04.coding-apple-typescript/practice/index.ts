@@ -1,66 +1,52 @@
-type Animal = { name: string };
-type Cat = { age: number } & Animal;
-
-interface 학생인터 {
-  name: string;
+function 함수(...a: number[]) {
+  console.log(a);
 }
 
-interface 학생인터 {
-  // 중복 선언 가능 (합쳐짐)
-  score?: number;
+함수(1, 5, 3, 5, 6, 6);
+
+let arr = [1, 2, 3];
+let arr2 = [4, 5];
+let arr3 = [...arr, ...arr2];
+
+let [변수1, 변수2] = ['안녕', 100];
+
+let { student: student, age: age } = {
+  student: true,
+  age: 26,
+};
+
+let 오브젝트 = { student: true, age: 26 };
+
+function 함수2({ student, age }: { student: boolean; age: number }) {
+  console.log(student, age);
 }
 
-interface 선생인터 extends 학생인터 {
-  age: number;
-}
-
-let 학생: 학생인터 = { name: 'kim' };
-let 선생: 선생인터 = { name: 'kim', age: 20 };
+함수2({ student: true, age: 26 });
 
 // hw1
 
-interface Product {
-  brand: string;
-  serialNumber: number;
-  model: string[];
+function hw1(...a: number[]) {
+  let max = 0;
+  for (let i of a) {
+    if (max <= i) max = i;
+  }
+  console.log(`hw1 : ${max}`);
 }
 
-let 상품: Product = { brand: 'Samsung', serialNumber: 1360, model: ['TV', 'phone'] };
+hw1(1, 2, 3, 4);
 
 // hw2
 
-interface Cart {
-  product: string;
-  price: number;
+function hw2({ user, comment, admin }: { user: string; comment: number[]; admin: boolean }) {
+  console.log(`hw2 : ${user}, ${comment}, ${admin}`);
 }
 
-let 장바구니: Cart[] = [
-  { product: '청소기', price: 7000 },
-  { product: '삼다수', price: 800 },
-];
+hw2({ user: 'kim', comment: [3, 5, 4], admin: false });
 
 // hw3
 
-interface MoreCart extends Cart {
-  card: boolean;
+function hw3([cnt, product, status]: (number | string | boolean)[]) {
+  console.log(`hw3 : ${cnt}, ${product}, ${status}`);
 }
 
-let 장바구니2: MoreCart[] = [{ product: '청소기', price: 7000, card: false }];
-
-// hw4
-
-interface CalType {
-  plus: (a: number, b: number) => number;
-  minus: (a: number, b: number) => number;
-}
-
-let calculator: CalType = {
-  plus(a, b) {
-    return a + b;
-  },
-  minus(a, b) {
-    return a - b;
-  },
-};
-
-console.log(calculator.minus(3, 2));
+hw3([40, 'wine', false]);
