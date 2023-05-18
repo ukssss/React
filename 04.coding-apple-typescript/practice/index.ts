@@ -1,52 +1,21 @@
-function 함수(...a: number[]) {
-  console.log(a);
-}
-
-함수(1, 5, 3, 5, 6, 6);
-
-let arr = [1, 2, 3];
-let arr2 = [4, 5];
-let arr3 = [...arr, ...arr2];
-
-let [변수1, 변수2] = ['안녕', 100];
-
-let { student: student, age: age } = {
-  student: true,
-  age: 26,
+type Car = {
+  wheel: '4개';
+  color: string;
 };
 
-let 오브젝트 = { student: true, age: 26 };
+type Bike = {
+  wheel: '2개';
+  color: string;
+};
 
-function 함수2({ student, age }: { student: boolean; age: number }) {
-  console.log(student, age);
-}
-
-함수2({ student: true, age: 26 });
-
-// hw1
-
-function hw1(...a: number[]) {
-  let max = 0;
-  for (let i of a) {
-    if (max <= i) max = i;
+function 함수(x: Car | Bike) {
+  if (x.wheel === '4개') {
+    console.log(`자동차 바퀴 ${x.wheel}`);
+  } else {
+    console.log(`바이크 바퀴 ${x.wheel}`);
   }
-  console.log(`hw1 : ${max}`);
 }
 
-hw1(1, 2, 3, 4);
+let test: Car = { wheel: '4개', color: 'blue' };
 
-// hw2
-
-function hw2({ user, comment, admin }: { user: string; comment: number[]; admin: boolean }) {
-  console.log(`hw2 : ${user}, ${comment}, ${admin}`);
-}
-
-hw2({ user: 'kim', comment: [3, 5, 4], admin: false });
-
-// hw3
-
-function hw3([cnt, product, status]: (number | string | boolean)[]) {
-  console.log(`hw3 : ${cnt}, ${product}, ${status}`);
-}
-
-hw3([40, 'wine', false]);
+함수(test);
