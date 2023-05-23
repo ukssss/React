@@ -1,21 +1,65 @@
-// hw1
-import { Bike, Car } from './a';
+// function 함수<MyType>(x: MyType[]): MyType {
+//   return x[0];
+// }
 
-let 자동차: Car = { wheel: 4, model: 'avante' };
-let 자전거: Bike = { wheel: 2, model: 'scott' };
+// let a = 함수<number>([4, 2]);
+// let b = 함수<string>(['4', '2']);
+// console.log(a);
+// console.log(b);
+
+// function 함수2<MyType extends number>(x: MyType) {
+//   return x - 1;
+// }
+
+// let c = 함수2<number>(100);
+
+// interface LengthCheck {
+//   length: number;
+// }
+
+// function 함수3<MyType extends LengthCheck>(x: MyType) {
+//   return x.length;
+// }
+
+// let d = 함수3<string[]>(['100']);
+
+// hw1
+
+function hw1<T extends string | string[]>(x: T) {
+  console.log(x.length);
+}
+
+let hw1a = hw1<string>('hello');
+let hw1b = hw1<string[]>(['kim', 'park']);
 
 // hw2
 
-import { Hw2 } from './a';
+interface Animal {
+  name: string;
+  age: number;
+}
 
-let hw2: Hw2 = (a) => {
-  console.log(a);
-};
+let data = '{"name" : "dog", "age" : 1 }';
 
-hw2({ test: 'hello' });
+function hw2<T>(x: string): void {
+  console.log(JSON.parse(x));
+}
+
+hw2<Animal>(data);
 
 // hw3
-///<reference path="./a.ts"/>
 
-let stringDog: StringDog.Dog = 'chiwawa';
-let objectDog: ObjectDog.Dog = { name: 'chika' };
+class Person<T> {
+  name;
+  constructor(a: T) {
+    this.name = a;
+  }
+}
+
+let a = new Person<string>('어쩌구');
+let b = new Person<string[]>(['어쩌구', '절씨구']);
+let c = new Person<number>(123);
+
+console.log(a.name);
+console.log(b.name);
+console.log(c.name);
