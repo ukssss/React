@@ -1,0 +1,2 @@
+let test = 'ukss';
+export {};
