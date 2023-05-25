@@ -1,41 +1,26 @@
-// function 함수<MyType>(x: MyType[]): MyType {
-//   return x[0];
-// }
-// let a = 함수<number>([4, 2]);
-// let b = 함수<string>(['4', '2']);
-// console.log(a);
-// console.log(b);
-// function 함수2<MyType extends number>(x: MyType) {
-//   return x - 1;
-// }
-// let c = 함수2<number>(100);
-// interface LengthCheck {
-//   length: number;
-// }
-// function 함수3<MyType extends LengthCheck>(x: MyType) {
-//   return x.length;
-// }
-// let d = 함수3<string[]>(['100']);
+let arr = [1, 2, 3];
+let arr2 = [4, 5, ...arr];
 // hw1
-function hw1(x) {
-    console.log(x.length);
-}
-let hw1a = hw1('hello');
-let hw1b = hw1(['kim', 'park']);
-let data = '{"name" : "dog", "age" : 1 }';
-function hw2(x) {
-    console.log(JSON.parse(x));
-}
-hw2(data);
+let food = ['동서녹차', 4000, true];
+// hw2
+let hw2 = ['동서녹차', 4000, true, false, true, true, false, true];
 // hw3
-class Person {
-    constructor(a) {
-        this.name = a;
-    }
+function hw3(...rest) {
+    return '메롱';
 }
-let a = new Person('어쩌구');
-let b = new Person(['어쩌구', '절씨구']);
-let c = new Person(123);
-console.log(a.name);
-console.log(b.name);
-console.log(c.name);
+hw3('test', true, 1, 1, '2', 5);
+// hw4
+function hw4(...rest) {
+    let result = [[], []];
+    rest.forEach((el) => {
+        if (typeof el === 'string') {
+            result[0].push(el);
+        }
+        else {
+            result[1].push(el);
+        }
+    });
+    return result;
+}
+let answer = hw4('b', 5, 6, 8, 'a');
+console.log(answer);
