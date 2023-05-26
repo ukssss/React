@@ -1,1 +1,0 @@
-type Age = number;
