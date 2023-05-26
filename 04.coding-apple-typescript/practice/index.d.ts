@@ -1,17 +1,24 @@
-interface StringOnly {
-    [key: string]: string | number;
-}
-declare let user: StringOnly;
-interface MyType {
-    'font-size': MyType | number;
-}
-declare let css: MyType;
-interface Hw1 {
-    [key: string]: string | number;
-}
-declare let obj: Hw1;
-interface Hw2 {
-    'font-size': number;
-    [key: string]: Hw2 | number;
-}
-declare let obj2: Hw2;
+type Car = {
+    color: boolean;
+    model: boolean;
+    price: boolean | number;
+};
+type TypeChanger<MyType> = {
+    [key in keyof MyType]: string;
+};
+type NewType = TypeChanger<Car>;
+type Bus = {
+    color: string;
+    model: boolean;
+    price: number;
+};
+type TypeChangerHw1<MyType> = {
+    [key in keyof MyType]: string | number;
+};
+type NewTypeHw1 = TypeChangerHw1<Bus>;
+declare let hw1: NewTypeHw1;
+type TypeChangerHw2<MyType, T> = {
+    [key in keyof MyType]: T;
+};
+type NewTypeString = TypeChangerHw2<Bus, string>;
+type NewTypeNumber = TypeChangerHw2<Bus, number>;
